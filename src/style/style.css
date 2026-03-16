@@ -1,0 +1,249 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#cedbdb,#e6f2f2);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+}
+
+
+/* titulo */
+
+.hoot{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.hoot h1{
+    font-size:28px;
+    color:#333;
+}
+
+
+/* busca */
+
+.pesquisa{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+.pesquisa input{
+    padding:8px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+.pesquisa button{
+    padding:8px 12px;
+    border:none;
+    background:#007bff;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.pesquisa button:hover{
+    background:#0056b3;
+}
+
+
+/* formulario */
+
+.container{
+    width:100%;
+    max-width:400px;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.container input,
+.container select{
+    padding:10px;
+    border-radius:5px;
+    border:1px solid #ccc;
+    width:100%;
+}
+
+
+/* selects */
+
+.escolhas{
+    display:flex;
+    gap:10px;
+}
+
+.escolhas select{
+    flex:1;
+}
+
+
+/* botao salvar */
+
+.Button-salvar{
+    display:flex;
+    justify-content:center;
+}
+
+#btn-salvar{
+    padding:10px 20px;
+    border:none;
+    border-radius:6px;
+    background:#28a745;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+#btn-salvar:hover{
+    background:#1e7e34;
+}
+
+
+/* area tarefas */
+
+.tarefas-section{
+    width:100%;
+    max-width:900px;
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.tarefas-section h2{
+    margin-bottom:20px;
+    color:#333;
+}
+
+
+/* lista tarefas */
+
+.lista-grid{
+    width:100%;
+    max-width:900px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    gap:20px;
+    justify-content:center;
+}
+
+
+/* card */
+
+.tarefas-card{
+    background:white;
+    border-radius:10px;
+    padding:15px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.card-header h3{
+    font-size:18px;
+}
+
+.tarefas-conteudo{
+    font-size:14px;
+    color:#555;
+    margin-bottom:10px;
+}
+
+.tarefas-meta{
+    font-size:12px;
+    color:#777;
+}
+
+
+/* prioridade */
+
+.badge-baixo{
+    background:#d4edda;
+    color:#155724;
+    padding:4px 8px;
+    border-radius:5px;
+    font-size:12px;
+}
+
+.badge-medio{
+    background:#fff3cd;
+    color:#856404;
+    padding:4px 8px;
+    border-radius:5px;
+    font-size:12px;
+}
+
+.badge-alto{
+    background:#f8d7da;
+    color:#721c24;
+    padding:4px 8px;
+    border-radius:5px;
+    font-size:12px;
+}
+
+
+/* botoes */
+
+.card-actions{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.btn-edit{
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.btn-delete{
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+
+/* responsivo */
+
+@media (max-width:600px){
+
+    .pesquisa{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .escolhas{
+        flex-direction:column;
+    }
+
+    .container{
+        max-width:100%;
+    }
+
+}
