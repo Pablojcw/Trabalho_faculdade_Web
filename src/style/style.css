@@ -247,3 +247,15 @@ body{
     }
 
 }
+.btn-concluir{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.btn-concluir:hover{
+    background:#1e7e34;
+}

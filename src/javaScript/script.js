@@ -1,12 +1,14 @@
 let tarefaEdicao = null;
 
+
 // FUNCAO USADA PARA SALVAR AS TAREFAS DO USUARIO
 function salvarTarefa() {
-    const titulo = document.getElementById('titulo')?.value.trim();
-    const conteudo = document.getElementById('descricao')?.value.trim();
-    const data = document.getElementById('data')?.value.trim();
-    const SLA = document.getElementById('SLA')?.value.trim();
-    const status = document.getElementById('status')?.value.trim();
+
+    const titulo = document.getElementById('titulo').value.trim();
+    const conteudo = document.getElementById('descricao').value.trim();
+    const data = document.getElementById('data').value.trim();
+    const SLA = document.getElementById('SLA').value.trim();
+    const status = document.getElementById('status').value.trim();
 
     if (!titulo || !conteudo || !data || !SLA || !status) {
         alert("Preencha todos os campos para que possa ser salvo");
@@ -21,11 +23,11 @@ function salvarTarefa() {
 
     if (tarefaEdicao) {
 
-        tarefas = tarefas.map(p => {
-            if (p.id === tarefaEdicao) {
-                return { ...p, titulo, conteudo, data, SLA, status };
+        tarefas = tarefas.map(t => {
+            if (t.id === tarefaEdicao) {
+                return { ...t, titulo, conteudo, data, SLA, status };
             }
-            return p;
+            return t;
         });
 
         tarefaEdicao = null;
@@ -55,15 +57,13 @@ function salvarTarefa() {
     document.getElementById("SLA").value = "baixo";
     document.getElementById("status").value = "pendente";
 
-
 }
 
 
-// FUNCAO QUE VAI SER USADA PARA LISTAR AS TAREFAS DO USUARIO
+// FUNCAO QUE VAI SER USADA PARA LISTAR AS TAREFAS
 function listarTarefas() {
 
     const listaDiv = document.getElementById("lista-tarefas");
-    if (!listaDiv) return;
 
     let tarefas = JSON.parse(localStorage.getItem("salvar-tarefas"));
 
@@ -76,8 +76,10 @@ function listarTarefas() {
         return;
     }
 
-    listaDiv.innerHTML = tarefas.map(item => `
+    listaDiv.innerHTML = tarefas.map((item) => `
+
         <div class="tarefas-card">
+
             <div class="card-header">
                 <h3 class="tarefas-titulo">${item.titulo}</h3>
                 <span class="badge-${item.SLA}">${item.SLA}</span>
@@ -87,17 +89,20 @@ function listarTarefas() {
             <p class="tarefas-meta">${item.data} | ${item.status}</p>
 
             <div class="card-actions">
-                <button onclick="editrarTarefas(${item.id})" class="btn-edit">Editar</button>
-                <button onclick="excluirTarefa(${item.id})" class="btn-delete">Excluir</button>
+                <button class="btn-edit" onclick="editarTarefa(${item.id})">Editar</button>
+                <button class="btn-delete" onclick="excluirTarefa(${item.id})">Excluir</button>
+                <button class="btn-concluir" onclick="concluirTarefa(${item.id})">Concluir</button>
             </div>
 
         </div>
+
     `).join("");
 }
 
 
+
 // FUNCAO PARA CARREGAR DADOS DA TAREFA NO FORMULARIO
-function editrarTarefas(id) {
+function editarTarefa(id) {
 
     let tarefas = JSON.parse(localStorage.getItem("salvar-tarefas"));
 
@@ -119,6 +124,7 @@ function editrarTarefas(id) {
 }
 
 
+
 // FUNCAO PARA EXCLUIR UMA TAREFA
 function excluirTarefa(id) {
 
@@ -136,6 +142,8 @@ function excluirTarefa(id) {
 }
 
 
+
+// FUNCAO DE BUSCAR TAREFAS
 function buscarTarefas() {
 
     const termo = document.getElementById("txtBusca").value.toLowerCase();
@@ -145,10 +153,12 @@ function buscarTarefas() {
     if (!Array.isArray(tarefas)) {
         tarefas = [];
     }
-    if (!tarefas || tarefas.length === 0) {
+
+    if (tarefas.length === 0) {
         alert("Nenhuma tarefa cadastrada.");
         return;
     }
+
     const resultado = tarefas.filter(tarefa =>
         tarefa.titulo.toLowerCase().includes(termo)
     );
@@ -161,7 +171,9 @@ function buscarTarefas() {
     }
 
     listaDiv.innerHTML = resultado.map(item => `
+
         <div class="tarefas-card">
+
             <div class="card-header">
                 <h3>${item.titulo}</h3>
                 <span>${item.SLA}</span>
@@ -170,11 +182,34 @@ function buscarTarefas() {
             <p>${item.conteudo}</p>
             <p>${item.data} | ${item.status}</p>
 
-            <button onclick="editrarTarefas(${item.id})">Editar</button>
+            <button onclick="editarTarefa(${item.id})">Editar</button>
             <button onclick="excluirTarefa(${item.id})">Excluir</button>
-            <button onclick="concluirTarefa(${item.id})"class="btn-delete">Excluir</button>
+            <button onclick="concluirTarefa(${item.id})">Concluir</button>
 
         </div>
-    `).join("");
 
+    `).join("");
+}
+
+
+
+// FUNCAO PARA MARCAR COMO CONCLUIDO
+function concluirTarefa(id) {
+
+    let tarefas = JSON.parse(localStorage.getItem("salvar-tarefas"));
+
+    if (!Array.isArray(tarefas)) {
+        tarefas = [];
+    }
+
+    tarefas = tarefas.map(t => {
+        if (t.id === id) {
+            return { ...t, status: "concluido" };
+        }
+        return t;
+    });
+
+    localStorage.setItem("salvar-tarefas", JSON.stringify(tarefas));
+
+    listarTarefas();
 }
